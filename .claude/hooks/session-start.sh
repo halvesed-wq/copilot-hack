@@ -22,5 +22,4 @@ if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
 fi
 
 # SvelteKit client dependencies for the sample solution
-# --legacy-peer-deps: typescript ^7 conflicts with the ^6 peer range of @sveltejs/kit 3.1
-(cd possible-solution/client && npm install --no-audit --no-fund --legacy-peer-deps)
+(cd possible-solution/client && npm install --no-audit --no-fund)
