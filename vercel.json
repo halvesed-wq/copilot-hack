@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "client": {
+      "root": "possible-solution/client",
+      "framework": "sveltekit-1",
+      "bindings": [
+        { "type": "service", "service": "server", "format": "url", "env": "SERVER_URL" }
+      ]
+    },
+    "server": {
+      "root": "possible-solution/server",
+      "framework": "flask"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "client"
+      }
+    }
+  ]
+}
