@@ -6,8 +6,10 @@
 //   return result
 // }
 
+import { serverUrl } from '$lib/server/api';
+
 export async function load({ fetch }) {
-  const res = await fetch(`http://localhost:5000/airports`);
+  const res = await fetch(serverUrl('airports'));
   const airports = await res.json();
   // console.log({airports})
   return {airports};
@@ -18,11 +20,14 @@ export const actions = {
     // get form data
     const data = await request.formData();
 
-    const day_of_week = data.get('day');
-    const airport_id = data.get('airport');
+    const day_of_week = String(data.get('day'));
+    const airport_id = String(data.get('airport'));
 
     // make request to server
-    const res = await fetch(`http://localhost:5000/predict?day_of_week=${day_of_week}&airport_id=${airport_id}`)
+    const url = serverUrl('predict');
+    url.searchParams.set('day_of_week', day_of_week);
+    url.searchParams.set('airport_id', airport_id);
+    const res = await fetch(url)
     const result = await res.json();
     return {result};
   }
